@@ -1,0 +1,156 @@
+
+        static void Optionthree()                                                                                                                               //This is a method and the method is called Optionthree
+        {
+
+
+
+            bool validstring = true;
+            do
+            {
+                Console.WriteLine("Encrypt Text");
+                Console.WriteLine("------------");
+                Console.WriteLine("Please enter text to encrypt: ");                                                                                                     //Displays a input asking what the user would like to encrypt
+                string UserString = Console.ReadLine();                                                                                                             //Declaration of a veriable called UserString is set equal to Console.Readline(), which gets the input from the previous Console.WriteLine statement
+                Regex r = new Regex("^[a-zA-Z ]+$");
+                validstring = true;
+
+                if (r.IsMatch(UserString))                                                                                                                          //If the UserString has only alphabet and space characters then do the code in the if statement
+                {
+                    bool validshift = true;
+                    do
+                    {
+                        Console.WriteLine(" ");                                                                                                                         //Displaying a whitespace so there is a space between the inputed string and the going to be inputed key
+                        Console.Write("Please enter shift (between 1 and 36)");                                                                                                                //Displays a input asking what key the user would like to encrypt with
+                        int key = Convert.ToInt32(Console.ReadLine());                                                                                                  //Declaring a integer called key and converting it to a integer
+                        Console.WriteLine(" ");
+
+                        if (key > 0 && key < 37)                                                                                                                      //If statement - If the key is less than 1 and greater than 36 the excecute the code inside the If statement
+                        {
+                           Console.WriteLine("Encrypted Data");                                                                                                        //Displaying text to tell what the output is which is Encrypted Data
+                           string cipherText = Encipher(UserString, key);                                                                                              //Declaring a variable that is equal to the UserString and the key to be passed through a method 
+                           Console.WriteLine(cipherText);                                                                                                              //Display the decrypted data
+                           validshift = true;
+                           Console.ReadLine();                                                                                                                         //Getting the user input from the last statement and program will end here
+                        }
+
+                        else
+                        {
+                            validshift = false;
+                            Console.WriteLine("Invalid shift amount");
+                        }
+
+                        } while (!validshift);
+                }
+
+                else                                                                                                                                                //Else Statement
+                {
+                    Console.WriteLine("Invalid input text");                //Displaying a error message if the user enters a invalid string
+                    Optionthree();                                                                                                                                  //Calling a method which is Optionfour
+                }
+
+            } while (!validstring);
+
+        }
+
+
+/*
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*/
+//Option Four
+
+        static void Optionfour()                                                                                                                              //This is a method and the method is called Optionfour
+        {
+            Console.WriteLine("Please enter text to encrypt:");
+            Console.WriteLine("Please enter text to encrypt:");
+            Console.WriteLine("Please enter text to encrypt:");                                                                                                   //Displays a input asking what the user would like to decrypt
+            string UserString = Console.ReadLine();                                                                                                           //Declaration of a veriable called UserString is set equal to Console.Readline(), which gets the input from the previous Console.WriteLine statement
+            Regex r = new Regex("^[a-zA-Z ]+$");                                                                                                              //Using the regex function and making a variable with a list of the alphabets and a space
+
+            if (r.IsMatch(UserString))                                                                                                                        //If the UserString has only alphabet and space characters then do the code in the if statement
+            {
+                Console.WriteLine(" ");                                                                                                                       //Displaying a whitespace so there is a space between the inputed string and the going to be inputed key
+
+                Console.Write("Enter your Key");                                                                                                              //Displays a input asking what key the user would like to decrypt with
+                int key = Convert.ToInt32(Console.ReadLine());                                                                                                //Declaring a integer called key and converting it to a integer
+                Console.WriteLine(" ");                                                                                                                       //Displaying a whitespace so that if the User enters a option it is displayed seperatly from the menu
+
+                if (key > 1 && key < 36) ;                                                                                                                    //If statement - If the key is less than 1 and greater than 36 the excecute the code inside the If statement
+                {
+                    string cipherText = Decipher2(UserString, key);                                                                                           //Declaring a variable that is equal to the UserString and the key to be passed through a method 
+                    Console.WriteLine("Decrypted Data:");                                                                                                     //Displaying text to tell what the output is which is Decrypted Data
+                    Console.WriteLine(cipherText);                                                                                                            //Display the decrypted data
+                    Console.ReadLine();                                                                                                                       //Getting the user input from the last statement and program will end here
+                }                                 
+            }
+
+            else                                                                                                                                              //Else statement
+            {
+                Console.WriteLine("Invalid input text");              //Displaying a error message if the user enters a invalid string
+                Optionfour();                                                                                                                                 //Calling a method which is Optionfour
+            }
+        }
+
+
+/*
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*/
+//Functions/Methods Used in the Caeser Ciphers Encryption/Decryption that are aren't arpart of the Menu
+
+
+        /*Used for BOTH*/
+        public static string Encipher(string input, int key)                                                                                                 //Method
+        {
+            string output = string.Empty;                                                                                                                    //Chesking if the value is empty/null
+            foreach (char ch in input)                                                                                                                       //For each character in the variable input
+                output += cipher(ch, key);                                                                                                                   //the output has a addition assignment 
+            return output;                                                                                                                                   //Return output after exiting foreach loop
+        }
+
+
+
+
+        /*Used for the Decipher*/
+        public static char cipher2(char ch, int key)                                                                                                         //Method
+        {
+            if (!char.IsLetter(ch))                                                                                                                          //If character is not letter then...
+            {
+                return ch;                                                                                                                                   //Return character
+            }
+
+            char d = char.IsUpper(ch) ? 'A' : 'a';                                                                                                           //Declaring a variable (which is a character) and  using the upper function (making the lowercase equal to the uppercase)
+            return (char)((((ch - key) - d)) + d);                                                                                                           //Returning the character minusing the key to whatever case it was
+        }
+
+        public static string Decipher2(string input, int key)                                                                                                //Method
+        {
+            string output = string.Empty;                                                                                                                    //Chesking if the value is empty/null
+            foreach (char ch in input)                                                                                                                       //For each character in the variable input
+                output += cipher2(ch, key);                                                                                                                  //the output has a addition assignment 
+            return output;                                                                                                                                   //Return output
+        }
+
+        /*Used for the Encipher*/
+        public static char cipher(char ch, int key)                                                                                                          //Method
+        {
+            if (!char.IsLetter(ch))                                                                                                                          //If character is not letter then...
+            {
+                return ch;                                                                                                                                   //Return Character
+            }
+            char d = char.IsUpper(ch) ? 'A' : 'a';                                                                                                           //Declaring a variable (which is a character) and  using the upper function (making the lowercase equal to the uppercase)
+            return (char)((((ch + key) - d)) + d);                                                                                                           //Returning the character minusing the key to whatever case it was
+        }
+
+
+        public static string Decipher(string input, int key)                                                                                                 //Method
+        {
+            return Encipher(input, 26 - key);                                                                                                                //Returning output from Encipher MethoD
+        }
+    }
+}
