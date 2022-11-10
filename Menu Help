@@ -1,0 +1,45 @@
+namespace MyApplication                                                                           //Organisess and holds your code within that NameSpace (MyApplication)
+{
+    public class MainClass                                                                        //This is a class which is a container for the program code
+    {
+        internal static void Main()                                                               //This is the entry point of the Program, so code will start excecuting from here
+        {
+            char choice;                                                                          //Declares that a single character is required to choose a option 
+            do                                                                                    //This is a do while loop and will execute the code block once, before checking if the condition is true,then will repeat as long as condition is true
+            {
+
+                Console.WriteLine(" ");                                                          //Displaying a whitespace so that if the User enters incorrectly and the menu is shown again it is visually easier for the user to understand
+                Console.WriteLine("P4CS Mini Applications");                                     //Displaying the title of the applications
+                Console.WriteLine("----------------------");                                     //Displaying numerous of dashes to distinguish the title from the options
+                Console.WriteLine("Please select an option:");                                   //Displaying text to the User, asking he/she to select a option 
+                Console.WriteLine("1) Keep Counting");                                           //Displaying what Option 1 is
+                Console.WriteLine("2) Square Root Calculator");                                  //Displaying what Option 2 is
+                Console.WriteLine("3) Encrypt Text (Caesar Cipher)");                            //Displaying what Option 3 is
+                Console.WriteLine("4) Decrypt Text (Caesar Cipher)");                            //Displaying what Option 4 is
+                Console.WriteLine("9) Quit");                                                    //Displaying what Option 9 is
+                Console.WriteLine(" ");                                                          //Displaying a whitespace so that if the User enters a option it is displayed seperatly from the menu
+
+                choice = Console.ReadKey().KeyChar;                                              //I declared a variable called choice and made it equal to Console.ReadKey().KeyChar which reads the first character and show it on the console but without waiting for the Enter key to press.
+                if (choice == '9') break;                                                        //This if statemnt is implying that if the users input (choice) is 9 then break (exit menu)
+
+
+            } while (choice < '1' | choice > '8' & choice != 'q');                               //While loop
+            Console.WriteLine(" ");                                                              //Displaying a whitespace
+
+            switch (choice)                                                                      //Switch Statement
+            {
+                case '1':                                                                        //if the character 1 is typed
+                    Optionone();                                                                 //Calling a method which is Optionone
+                    break;                                                                       //break statement
+                case '2':                                                                        //if the character 2 is typed
+                    Optiontwo();                                                                 //Calling a method which is Optiontwo
+                    break;                                                                       //break statement
+                case '3':                                                                        //if the character 3 is typed
+                    Optionthree();                                                               //Calling a method which is Optionthree
+                    break;                                                                       //break statement
+                case '4':                                                                        //if the character 4 is typed
+                    Optionfour();                                                                //Calling a method which is Optionfour
+                    break;                                                                       //break statement
+            }
+
+        }
